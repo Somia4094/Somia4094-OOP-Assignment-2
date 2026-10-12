@@ -1,0 +1,37 @@
+digraph LibraryUML {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.65", splines=ortho, fontname="Arial", labelloc=t, label="Library System — UML Class Diagram", fontsize=22];
+  node [shape=plain, fontname="Arial"];
+  edge [fontname="Arial", fontsize=10, color="#475569", arrowsize=0.8];
+
+  Person [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>Person</B></TD></TR><TR><TD ALIGN="LEFT">+ PersonId: string {get}</TD></TR><TR><TD ALIGN="LEFT">+ FullName: string {get}</TD></TR><TR><TD ALIGN="LEFT">+ Phone: string {get}</TD></TR><TR><TD ALIGN="LEFT"># Person(...)</TD></TR></TABLE> >];
+  Member [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>Member</B></TD></TR><TR><TD ALIGN="LEFT">- _loans: List&lt;Loan&gt;</TD></TR><TR><TD ALIGN="LEFT">+ MaxLoans: int {get}</TD></TR><TR><TD ALIGN="LEFT">+ DiscountPercentage: decimal {get}</TD></TR><TR><TD ALIGN="LEFT">+ Loans: IReadOnlyList&lt;Loan&gt; {get}</TD></TR><TR><TD ALIGN="LEFT"># Member(...)</TD></TR><TR><TD ALIGN="LEFT">+ BorrowItem(...): Loan</TD></TR></TABLE> >];
+  Staff [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>Staff</B></TD></TR><TR><TD ALIGN="LEFT">+ HireDate: DateTime {get}</TD></TR><TR><TD ALIGN="LEFT">+ MonthlySalary: decimal {get; private set}</TD></TR><TR><TD ALIGN="LEFT">- ResponsibilityAllowance: decimal {get}</TD></TR><TR><TD ALIGN="LEFT"># Staff(...)</TD></TR><TR><TD ALIGN="LEFT">+ GiveRaise(percentage): void</TD></TR><TR><TD ALIGN="LEFT">+ GetMonthlyPay(): decimal</TD></TR></TABLE> >];
+  StudentMember [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>StudentMember</B></TD></TR><TR><TD ALIGN="LEFT">+ StudentMember(...)</TD></TR></TABLE> >];
+  PremiumMember [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>PremiumMember</B></TD></TR><TR><TD ALIGN="LEFT">+ ReadingPoints: int {computed get}</TD></TR><TR><TD ALIGN="LEFT">+ PremiumMember(..., discount)</TD></TR></TABLE> >];
+  Librarian [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>Librarian</B></TD></TR><TR><TD ALIGN="LEFT">+ ProcessReturn(...): void</TD></TR><TR><TD ALIGN="LEFT">+ MarkItemAsLost(...): void</TD></TR></TABLE> >];
+  Shelver [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>Shelver</B></TD></TR><TR><TD ALIGN="LEFT">+ Section: string {get; private set}</TD></TR><TR><TD ALIGN="LEFT">+ Reassign(section): void</TD></TR></TABLE> >];
+  HeadLibrarian [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>HeadLibrarian</B></TD></TR><TR><TD ALIGN="LEFT">+ ChangeLateFee(...): void</TD></TR><TR><TD ALIGN="LEFT">+ WithdrawItem(...): void</TD></TR><TR><TD ALIGN="LEFT">+ RestoreItem(...): void</TD></TR></TABLE> >];
+  LibraryItem [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>LibraryItem</B></TD></TR><TR><TD ALIGN="LEFT">+ CatalogNumber: string {get}</TD></TR><TR><TD ALIGN="LEFT">+ Title: string {get}</TD></TR><TR><TD ALIGN="LEFT">+ LoanPeriodDays: int {get}</TD></TR><TR><TD ALIGN="LEFT">+ BaseLateFee: decimal {get; private set}</TD></TR><TR><TD ALIGN="LEFT">- LateFeeMultiplier: decimal</TD></TR><TR><TD ALIGN="LEFT">+ DailyLateFee: decimal {computed get}</TD></TR><TR><TD ALIGN="LEFT">+ IsWithdrawn: bool {get; private set}</TD></TR><TR><TD ALIGN="LEFT">+ IsOnLoan: bool {get; private set}</TD></TR><TR><TD ALIGN="LEFT"># LibraryItem(...)</TD></TR><TR><TD ALIGN="LEFT">+ SetBaseLateFee(...): void</TD></TR><TR><TD ALIGN="LEFT">+ Withdraw(): void</TD></TR><TR><TD ALIGN="LEFT">+ Restore(): void</TD></TR><TR><TD ALIGN="LEFT">~ MarkBorrowed(): void</TD></TR><TR><TD ALIGN="LEFT">~ MarkReturned(): void</TD></TR></TABLE> >];
+  Book [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>Book</B></TD></TR><TR><TD ALIGN="LEFT">+ Book(...)</TD></TR></TABLE> >];
+  DVD [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>DVD</B></TD></TR><TR><TD ALIGN="LEFT">+ DVD(...)</TD></TR></TABLE> >];
+  Magazine [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0f2fe"><B>Magazine</B></TD></TR><TR><TD ALIGN="LEFT">+ Magazine(...)</TD></TR></TABLE> >];
+  Loan [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fef3c7"><B>Loan</B></TD></TR><TR><TD ALIGN="LEFT">+ LoanId: string {get}</TD></TR><TR><TD ALIGN="LEFT">+ BorrowDate: DateTime {get}</TD></TR><TR><TD ALIGN="LEFT">+ Member: Member {get}</TD></TR><TR><TD ALIGN="LEFT">+ Item: LibraryItem {get}</TD></TR><TR><TD ALIGN="LEFT">+ DueDate: DateTime {computed get}</TD></TR><TR><TD ALIGN="LEFT">+ Status: LoanStatus {get; private set}</TD></TR><TR><TD ALIGN="LEFT">+ ReturnDate: DateTime? {get; private set}</TD></TR><TR><TD ALIGN="LEFT">+ LateFee: decimal {computed get}</TD></TR><TR><TD ALIGN="LEFT">~ Loan(...)</TD></TR><TR><TD ALIGN="LEFT">+ Return(date): void</TD></TR><TR><TD ALIGN="LEFT">+ MarkAsLost(): void</TD></TR></TABLE> >];
+  LoanStatus [label=< <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#f3e8ff"><B>enum LoanStatus</B></TD></TR><TR><TD ALIGN="LEFT">Borrowed</TD></TR><TR><TD ALIGN="LEFT">Returned</TD></TR><TR><TD ALIGN="LEFT">Lost</TD></TR></TABLE> >];
+
+  Member -> Person [arrowhead=empty, arrowsize=1.2];
+  Staff -> Person [arrowhead=empty, arrowsize=1.2];
+  StudentMember -> Member [arrowhead=empty, arrowsize=1.2];
+  PremiumMember -> Member [arrowhead=empty, arrowsize=1.2];
+  Librarian -> Staff [arrowhead=empty, arrowsize=1.2];
+  Shelver -> Staff [arrowhead=empty, arrowsize=1.2];
+  HeadLibrarian -> Staff [arrowhead=empty, arrowsize=1.2];
+  Book -> LibraryItem [arrowhead=empty, arrowsize=1.2];
+  DVD -> LibraryItem [arrowhead=empty, arrowsize=1.2];
+  Magazine -> LibraryItem [arrowhead=empty, arrowsize=1.2];
+  Member -> Loan [dir=none, taillabel="1", headlabel="0..*", label="loans", color="#0f766e", constraint=false];
+  Loan -> LibraryItem [dir=none, taillabel="0..*", headlabel="1", label="item", color="#0f766e", constraint=false];
+  Loan -> LoanStatus [style=dashed, arrowhead=vee, label="status", constraint=false];
+  {rank=same; StudentMember; PremiumMember;}
+  {rank=same; Librarian; Shelver; HeadLibrarian;}
+  {rank=same; Book; DVD; Magazine;}
+}
